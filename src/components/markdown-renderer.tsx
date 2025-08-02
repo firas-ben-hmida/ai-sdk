@@ -48,8 +48,8 @@ const MarkdownRenderer = ({ content, className }: MarkdownRendererProps) => {
                             {children}
                         </li>
                     ),
-                    // @ts-ignore
-                    code: ({ node, inline, className, children, ...props }) => {
+                    // @ts-expect-error - ReactMarkdown types issue
+                    code: ({ inline, className, children, ...props }) => {
                         return !inline ? (
                             <pre className="bg-muted/50 p-3 rounded-lg mb-3 last:mb-0 overflow-x-auto">
                                 <code className={cn("text-sm", className)} {...props}>
@@ -78,6 +78,7 @@ const MarkdownRenderer = ({ content, className }: MarkdownRendererProps) => {
                         </a>
                     ),
                     img: ({ src, alt }) => (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                             src={src}
                             alt={alt}
